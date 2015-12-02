@@ -263,6 +263,7 @@ currently-scanned namespace is first."""
                                     shell=True)
             _name = name
             proc_name, err = proc.communicate(name.encode())
+            proc_name = proc_name.strip()
             if proc.returncode:
                 raise ValueError('filter: "%s" exited: %d with error: %s' %
                                  (self._symbol_filter_cmd, proc.returncode, err))
@@ -331,7 +332,7 @@ raise ValueError."""
             if proc.returncode:
                 raise ValueError('filter: "%s" exited: %d with error: %s' %
                                  (self._identifier_filter_cmd, proc.returncode, err))
-            ident = proc_ident.decode('ascii')
+            ident = proc_ident.decode('ascii').strip()
 
         hidden = ident.startswith('_')
         if hidden:
